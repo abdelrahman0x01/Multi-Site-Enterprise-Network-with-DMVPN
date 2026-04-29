@@ -1,0 +1,79 @@
+Current configuration : 1039 bytes
+!
+! Last configuration change at 23:19:02 UTC Wed Apr 29 2026
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname B2-Floor1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 eaOP83n/Avy2EAs2tg7JbhLCX5T8h39E3GwBeTDW5sY
+!
+no aaa new-model
+!
+ip cef
+!
+!
+no ipv6 cef
+ipv6 multicast rpf use-bgp
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ duplex auto
+!
+interface Ethernet0/1
+ switchport access vlan 10
+ switchport mode access
+ duplex auto
+ spanning-tree bpduguard enable
+!
+interface Ethernet0/2
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ shutdown
+ duplex auto
+!
+!
+!
+no ip http server
+!
+!
+!
+!
+control-plane
+!
+banner motd ^C B2-Floor1 Access SW ^C
+!
+line con 0
+ password 7 096F471A1A0A
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 062506324F41
+ login
+!
+end

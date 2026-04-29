@@ -1,0 +1,84 @@
+
+Current configuration : 1096 bytes
+!
+! Last configuration change at 22:55:55 UTC Wed Apr 29 2026
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname B2-Core
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 eaOP83n/Avy2EAs2tg7JbhLCX5T8h39E3GwBeTDW5sY
+!
+no aaa new-model
+!
+ip cef
+!
+!
+no ipv6 cef
+ipv6 multicast rpf use-bgp
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ duplex auto
+!
+interface Ethernet0/1
+ duplex auto
+!
+interface Ethernet0/2
+ no switchport
+ ip address 10.2.1.1 255.255.255.252
+!
+interface Ethernet0/3
+ shutdown
+ duplex auto
+!
+interface Vlan10
+ ip address 10.2.10.1 255.255.255.0
+!
+router ospf 1
+ router-id 1.1.1.1
+ network 10.2.1.0 0.0.0.3 area 0
+ network 10.2.10.0 0.0.0.255 area 0
+!
+!
+!
+no ip http server
+!
+!
+!
+!
+control-plane
+!
+banner motd ^C B2-Core SW ^C
+!
+line con 0
+ password 7 106D000A0618
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 123A0C041104
+ login
+ transport input telnet
+!
+end
